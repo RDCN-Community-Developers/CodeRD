@@ -18,3 +18,19 @@ So,I wanted to create a way to simplify this.That's why PyRD was born.
 Although python is another language to learn for the mappers,but I've tried to simplify the cost of learning,and reduce the steps to make a chart.
 I hope more of you guys can join in to maintain this project.
 Because everyone is a treasure to be treated nicely.
+
+# 使用说明
+这只是一个很简单的模块，具体的内容在pyrd模块里有比较全面的注释，后期会加入Docs进行说明，如果想要使用，直接下载项目并新建Python文件，输入下面内容引用模块即可。
+```python
+from pyrd import *
+```
+# Usage
+For now this is a simple module,and it‘s yet uncompleted.The detailed functions are all in pyrd.py,you can get in and have a look.for using this,just download this project,create a python file and import the module using the code above.
+
+# TODO:
+· 将角色封装为一个类 / Make Character a class
+· 错误检验 / Error check and mapper
+· 添加二拍提示音(参见rdnurse) / Generate Oneshot nurse sound(will have a look on project rdnurse)
+# WON’T DO:
+· VFX相关，因为本项目是比较针对于视障群体的，所以并不考虑对视觉和装饰部分逻辑进行处理（主要是没时间） / Functions about visual effects.Despite that this project is aimed to blind people,also I don‘t have a lot of time to code.
+(如果你们谁有时间可以自己fork然后做了往我这里提pr) / If you guys have plenty of time you can fork,do it and submit pull request.
