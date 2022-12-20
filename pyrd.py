@@ -51,8 +51,8 @@ class Character:
     
     #添加一个二拍轨道
     def AddOneshotBeat(self,bar,beat,pulseType,tick,squareSound=False):
-        if self.beatType != "Classic":
-            raise Exception("角色\""+self.characterName+"\"为七拍轨道,而您尝试添加一个二拍.")
+        if self.beatType != "Oneshot":
+            raise Exception("角色\""+self.characterName+"\"为二拍轨道,而您尝试添加一个七拍.")
         beatDict={  "bar": bar, 
                     "beat": beat, 
                     "y": self.row, 
@@ -63,12 +63,64 @@ class Character:
                     "squareSound": squareSound
                 }
         level['events'].append(beatDict)
-    
-    def 添加二拍声音(self):
-        pass
 
+    def SetX(self,bar,beat,pattern,syncoBeat=-1,syncoSwing=0):
+        if self.beatType != "Classic":
+            raise Exception("角色\""+self.characterName+"\"为二拍轨道,而您尝试添加一个七拍轨道的静音标记.")
+        XDict={ "bar": bar, 
+                "beat": beat, 
+                "y": self.row, 
+                "type": "SetRowXs", 
+                "row": self.row, 
+                "pattern": pattern, 
+                "syncoBeat": syncoBeat, 
+                "syncoSwing": syncoSwing 
+        }
+        level['events'].append(XDict)
+    def LongPress(self,bar,beat,tick,swing,setXs,hold):
+        if self.beatType != "Classic":
+            raise Exception("角色\""+self.characterName+"\"为二拍轨道,而您尝试添加一个长按拍.")
+        beatDict={  "bar": bar, 
+                    "beat": beat, 
+                    "y": self.row, 
+                    "type": "AddClassicBeat", 
+                    "row": self.row, 
+                    "tick": tick, 
+                    "swing": swing, 
+                    "setXs": setXs, 
+                    "hold": hold
+                }
+        level['events'].append(beatDict)
+    def FreeBeat_Start(self,bar,beat):
+        if self.beatType != "Classic":
+            raise Exception("角色\""+self.characterName+"\"为二拍轨道,而您尝试添加一个自由拍.")
+        beatDict={
+            "bar":bar,
+            "beat":beat,
+            "y":self.row,
+            "type":"AddFreeTimeBeat",
+            "row":self.row,
+            "hold":0,
+            "pulse":0
+        }
+        level['events'].append(beatDict)
+    def FreeBeat_Pulse(self,bar,beat,action,customPulse):
+        if self.beatType != "Classic":
+            raise Exception("角色\""+self.characterName+"\"为二拍轨道,而您尝试添加一个自由拍脉冲.")
+        beatDict={  "bar": bar, 
+                    "beat": beat, 
+                    "y": self.row, 
+                    "type": "PulseFreeTimeBeat", 
+                    "row": self.row, 
+                    "hold": 0, 
+                    "action": action, 
+                    "customPulse": customPulse 
+        }
+        level['events'].append(beatDict)
     
-
+#TODO: rdnurse 移植
+def CueOneShotBeep(self):
+    pass
 
 #覆写 .rdlevel中的settings
 #参数从左到右依次是:艺术家,歌曲名,作者名,难度,是否开启癫痫警告,(可选)预览照片,(可选)针管图象,(可选)描述,(可选)miss对应rank,(可选)rank对应结算语
@@ -102,8 +154,6 @@ def SetLevelMeta(artist,song,author,difficulty,seizureWarning,previewImage="",sy
 		"rankDescription": rankDescription,
     }
 
-
-
 #{ "bar": 1, "beat": 1, "y": 0, "type": "PlaySong", "filename": "sndOrientalTechno", "volume": 100, "pitch": 100, "pan": 0, "offset": 0, "bpm": 100, "loop": false },
 def PlayMusic(bar,beat,fileName,offset,bpm,volume=100,pitch=100,pan=0):
     musicDict={ "bar": bar,
@@ -119,60 +169,16 @@ def PlayMusic(bar,beat,fileName,offset,bpm,volume=100,pitch=100,pan=0):
                 "loop": False
                 }
     level['events'].append(musicDict)
-#{ "bar": 1, "beat": 1, "y": 0, "type": "AddClassicBeat", "row": 0, "tick": 1, "swing": 0, "hold": 0 },
-
-#{ "bar": 1, "beat": 1, "y": 1, "type": "AddOneshotBeat", "row": 1, "pulseType": "Wave", "tick": 1 },
 
 #{ "bar": 3, "beat": 3, "y": 0, "type": "SetRowXs", "row": 0, "pattern": "------", "syncoBeat": -1, "syncoSwing": 0 },
-def SetX(bar,beat,row,pattern,syncoBeat=-1,syncoSwing=0):
-    XDict={ "bar": bar, 
-            "beat": beat, 
-            "y": row, 
-            "type": "SetRowXs", 
-            "row": row, 
-            "pattern": pattern, 
-            "syncoBeat": syncoBeat, 
-            "syncoSwing": syncoSwing 
-        }
-    level['events'].append(XDict)
+
 #{ "bar": 4, "beat": 7, "y": 0, "type": "AddClassicBeat", "row": 0, "tick": 1, "swing": 0, "setXs": "FourBeat", "hold": 3 },
-def LongPress(bar,beat,row,tick,swing,setXs,hold):
-    beatDict={  "bar": bar, 
-                "beat": beat, 
-                "y": row, 
-                "type": "AddClassicBeat", 
-                "row": row, 
-                "tick": tick, 
-                "swing": swing, 
-                "setXs": setXs, 
-                "hold": hold
-            }
-    level['events'].append(beatDict)
+
 
 #{ "bar": 2, "beat": 3, "y": 0, "type": "AddFreeTimeBeat", "row": 0, "hold": 0, "pulse": 0 },
-def FreeBeat_Start(bar,beat,row):
-    beatDict={
-        "bar":bar,
-        "beat":beat,
-        "y":row,
-        "type":"AddFreeTimeBeat",
-        "row":row,
-        "hold":0,
-        "pulse":0
-    }
-    level['events'].append(beatDict)
+
 #{ "bar": 2, "beat": 4, "y": 0, "type": "PulseFreeTimeBeat", "row": 0, "hold": 0, "action": "Increment", "customPulse": 0 },
-def FreeBeat_Pulse(bar,beat,row,action,customPulse):
-    beatDict={  "bar": bar, 
-                "beat": beat, 
-                "y": row, 
-                "type": "PulseFreeTimeBeat", 
-                "row": row, 
-                "hold": 0, 
-                "action": action, 
-                "customPulse": customPulse 
-    }
-    level['events'].append(beatDict)
+
 def Export():
     fileName=level["settings"]["artist"]+"-"+level["settings"]["song"]+".rdlevel"
     with open(fileName,"w")as f:
