@@ -59,15 +59,15 @@ def AddCharacter(character,rowType,rooms,row,pulseSound,hideAtStart=False,pulseS
     level['rows'].append(characterDict)
 
 #{ "bar": 1, "beat": 1, "y": 0, "type": "PlaySong", "filename": "sndOrientalTechno", "volume": 100, "pitch": 100, "pan": 0, "offset": 0, "bpm": 100, "loop": false },
-def PlayMusic(bar,beat,fileName,offset,bpm,volume=100,pitch=100,pan=0):
+def PlayMusic(bar,beat,fileName,bpm,offset,volume=100,pitch=100,pan=0):
     musicDict={ "bar": bar,
                 "beat": beat, 
                 "y": 0, 
                 "type": "PlaySong", 
                 "filename": fileName, 
-                "volume": volume, 
-                "pitch": pitch, 
-                "pan": pan, 
+                "volume": volume if volume else 100, 
+                "pitch": pitch if pitch else 100, 
+                "pan": pan if pan else 0, 
                 "offset": offset, 
                 "bpm": bpm, 
                 "loop": False
@@ -86,13 +86,13 @@ def AddClassicBeat(bar,beat,row,tick,swing):
              }
     level['events'].append(beatDict)
 #{ "bar": 1, "beat": 1, "y": 1, "type": "AddOneshotBeat", "row": 1, "pulseType": "Wave", "tick": 1 },
-def AddOneshotBeat(bar,beat,row,pulseType,tick,squareSound=False):
+def AddOneshotBeat(bar,beat,row,tick,pulseType="Wave",squareSound=False):
     beatDict={  "bar": bar, 
                 "beat": beat, 
                 "y": row, 
                 "type": "AddOneshotBeat", 
                 "row": row, 
-                "pulseType":pulseType, 
+                "pulseType":pulseType if pulseType else "Wave", 
                 "tick": tick,
                 "squareSound": squareSound
             }
@@ -110,7 +110,7 @@ def SetX(bar,beat,row,pattern,syncoBeat=-1,syncoSwing=0):
         }
     level['events'].append(XDict)
 #{ "bar": 4, "beat": 7, "y": 0, "type": "AddClassicBeat", "row": 0, "tick": 1, "swing": 0, "setXs": "FourBeat", "hold": 3 },
-def LongBeat(bar,beat,row,tick,swing,setXs,hold):
+def LongBeat(bar,beat,row,tick,swing,hold,setXs):
     beatDict={  "bar": bar, 
                 "beat": beat, 
                 "y": row, 

@@ -1,6 +1,11 @@
 from pyrd import *
 from utils import *
 
+FUNCTION_DICT={
+    "播放音乐":PlayMusic,
+    "七拍":AddClassicBeat,
+    "二拍":AddOneshotBeat,
+}
 
 def parseMetaData(metadatas):
     metadataDict = {
@@ -29,6 +34,24 @@ def parseCharacter(charactersText):
             args[i] = replaceStringIfNecessary(args[i])
         AddCharacter(*args)
 
+def parseBar(bar:str,barNum):
+    commands=bar.split("\n")
+    print("Bar "+str(barNum))
+    for i in range(len(commands)):
+        print(commands[i])
+        command = commands[i].strip()
+        head,args=command.split(" ")
+        argList = args.split(",")
+        for i in range(len(argList)):
+            if argList[i] == ".":
+                argList[i] = None
+            try:
+                argList[i]=eval(argList[i])
+            except:
+                pass
+        argList.insert(0,barNum)
+        FUNCTION_DICT[head](*argList)
+    
 
 content = []
 #fileName = input("请输入sprd文件名:")
@@ -40,8 +63,10 @@ with open(fileName,'r',encoding="utf-8") as f:
     metadata = [x.strip() for x in metadata if x.strip()!=""]
     character = content[1].split('\n')
     character = [x.strip() for x in character if x.strip()!=""]
-    bar = content[2:]
-    bar = [x.strip() for x in bar if x.strip()!=""]
+    bars = content[2:]
+    bars = [x.strip() for x in bars if x.strip()!=""]
     parseMetaData(metadata)
     parseCharacter(character)
+    for i in range(len(bars)):
+        parseBar(bars[i],i+1)
     Export()
