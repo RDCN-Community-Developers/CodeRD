@@ -5,6 +5,7 @@ FUNCTION_DICT={
     "播放音乐":PlayMusic,
     "七拍":AddClassicBeat,
     "二拍":AddOneshotBeat,
+    "设置静音":SetX,
 }
 
 def parseMetaData(metadatas):
@@ -55,10 +56,10 @@ def parseBar(bar:str,barNum):
 
 content = []
 #fileName = input("请输入sprd文件名:")
-fileName = "example.sprd"
+fileName = "3q4a.sprd"
 with open(fileName,'r',encoding="utf-8") as f:
     sprd = f.read()
-    content = sprd.split("---")
+    content = sprd.split("```")
     metadata = content[0].split('\n')
     metadata = [x.strip() for x in metadata if x.strip()!=""]
     character = content[1].split('\n')
