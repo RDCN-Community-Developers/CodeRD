@@ -148,7 +148,7 @@ def FreeBeat_Pulse(bar,beat,row,action,customPulse):
     }
     level['events'].append(beatDict)
 #{ "bar": 1, "beat": 1, "y": 0, "type": "SetVFXPreset", "rooms": [0], "preset": "SilhouettesOnHBeat", "enable": true },
-def AddVFX(bar,beat,row,preset,enable):
+def AddVFX(bar,beat,row,preset,enable,*ex):
     actionDict={ "bar": bar,
                  "beat": beat,
                  "y": row,
@@ -157,6 +157,33 @@ def AddVFX(bar,beat,row,preset,enable):
                  "preset": preset,
                  "enable": enable
     }
+    sp1=["Rain","JPEG","Mosaic","ScreenWaves","Grain","Blizzard","Drawing","Aberration","Blur","HueShift"]
+    sp2=["TileN","CustomScreenScroll"]
+    if preset in sp1:
+        actionDict.update({"intensity": ex[0],
+                           "duration": ex[1],
+                           "ease": ex[2]
+                           })
+    elif preset in sp2:
+        actionDict.update({"floatX": ex[0],
+                           "floatY": ex[1]
+                           })
+    elif preset=="Bloom":
+        actionDict.update({"threshold": ex[0],
+                           "intensity": ex[1],
+                           "color": ex[2],
+                           "duration": ex[3],
+                           "ease": ex[4]
+                           })
+    level['events'].append(actionDict)
+
+def Flash(bar,beat,row,duration):
+    actionDict={ "bar": bar,
+                 "beat": beat,
+                 "y": row,
+                 "type": "Flash",
+                 "rooms": [0],
+                 "duration": duration }
     level['events'].append(actionDict)
     
 def Export():
