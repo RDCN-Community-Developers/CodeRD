@@ -1,3 +1,6 @@
 *.rdlevel
 /__pycache__
 main.py
+*.zip
+3q4a.sprd
+example.ogg
