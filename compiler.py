@@ -5,7 +5,7 @@ FUNCTION_DICT={
     "播放音乐":PlayMusic,
     "七拍":AddClassicBeat,
     "二拍":AddOneshotBeat,
-    "预设特效":AddVFX
+    "预设特效":AddVFX,
     "设置静音":SetX,
 }
 
