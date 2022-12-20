@@ -58,7 +58,7 @@ def parseBar(bar:str,barNum):
 
 content = []
 #fileName = input("请输入sprd文件名:")
-fileName = "3q4a.sprd"
+fileName = "example.sprd"
 with open(fileName,'r',encoding="utf-8") as f:
     sprd = f.read()
     content = sprd.split("```")
