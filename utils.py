@@ -58,33 +58,37 @@ TRANSLATION={
             "黑屏":"Blackout",
             "噪点":"Noise",
             "干扰":"GlitchObstruction",
-            #"落雨":"Rain", #"intensity": 100, "duration": 0, "ease": "Linear"
+            "落雨":"Rain",
             "矩阵":"Matrix",
             "纸屑":"Confetti",
             "落花":"FallingPetals",
             "落花-即刻":"FallingPetalsInstant",
             "飘雪":"FallingPetalsSnow",
             "雪花":"Snow",
-            #"高光":"Bloom", #"threshold": 0.3, "intensity": 2, "color": "000000", "duration": 0, "ease": "Linear"
+            "高光":"Bloom",
             "橙色高光":"OrangeBloom",
             "蓝色高光":"BlueBloom",
             "镜厅":"HallOfMirrors",
-            #"自定义屏幕块":"TileN", #"floatX": 1, "floatY": 1
+            "自定义屏幕块":"TileN",
             "灰度":"BlackAndWhite",
             "怀旧":"Sepia",
-            #"自定义滚屏":"CustomScreenScroll", #"floatX": 1, "floatY": 1
-            #"JPEG失真":"JPEG", #"intensity": 100, "duration": 0, "ease": "Linear"
+            "自定义滚屏":"CustomScreenScroll",
+            "JPEG失真":"JPEG",
             "脉冲计数":"NumbersAbovePulses",
-            #"马赛克":"Mosaic", #"intensity": 100, "duration": 0, "ease": "Linear"
-            #"海底波浪":"ScreenWaves", #"intensity": 100, "duration": 0, "ease": "Linear"
+            "马赛克":"Mosaic", 
+            "海底波浪":"ScreenWaves",
             "放克":"Funk",
-            #"电影噪点":"Grain", #"intensity": 100, "duration": 0, "ease": "Linear"
-            #"暴风雪":"Blizzard", #"intensity": 100, "duration": 0, "ease": "Linear"
-            #"素描":"Drawing", #"intensity": 100, "duration": 0, "ease": "Linear"
-            #"色像差":"Aberration", #"intensity": 100, "duration": 0, "ease": "Linear"
-            #"模糊":"Blur", #"intensity": 100, "duration": 0, "ease": "Linear"
-            #"径向模糊":"RadialBlur", #"intensity": 100, "duration": 0, "ease": "Linear"
-            #"色调偏移":"HueShift" #"intensity": 100, "duration": 0, "ease": "Linear"
+            "电影噪点":"Grain",
+            "暴风雪":"Blizzard",
+            "素描":"Drawing",
+            "色像差":"Aberration",
+            "模糊":"Blur",
+            "径向模糊":"RadialBlur",
+            "色调偏移":"HueShift",
+            #闪光时长
+            "短":"Short",
+            "中":"Medium",
+            "长":"Long"
 }
 
 def eng(str:str):
