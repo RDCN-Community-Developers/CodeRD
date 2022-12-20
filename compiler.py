@@ -7,6 +7,7 @@ FUNCTION_DICT={
     "二拍":AddOneshotBeat,
     "预设特效":AddVFX,
     "设置静音":SetX,
+    "闪光":Flash,
 }
 
 def parseMetaData(metadatas):
