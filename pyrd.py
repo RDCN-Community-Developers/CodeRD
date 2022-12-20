@@ -148,7 +148,7 @@ def FreeBeat_Pulse(bar,beat,row,action,customPulse):
     }
     level['events'].append(beatDict)
 #{ "bar": 1, "beat": 1, "y": 0, "type": "SetVFXPreset", "rooms": [0], "preset": "SilhouettesOnHBeat", "enable": true },
-def AddVFX(bar,beat,row,preset,enable,*ex):
+def AddPresetVFX(bar,beat,row,preset,enable,*ex):
     actionDict={ "bar": bar,
                  "beat": beat,
                  "y": row,
