@@ -5,6 +5,7 @@ FUNCTION_DICT={
     "播放音乐":PlayMusic,
     "七拍":AddClassicBeat,
     "二拍":AddOneshotBeat,
+    "预设特效":AddVFX
 }
 
 def parseMetaData(metadatas):
@@ -48,7 +49,7 @@ def parseBar(bar:str,barNum):
             try:
                 argList[i]=eval(argList[i])
             except:
-                pass
+                argList[i]=replaceStringIfNecessary(argList[i])
         argList.insert(0,barNum)
         FUNCTION_DICT[head](*argList)
     

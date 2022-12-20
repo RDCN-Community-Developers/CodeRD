@@ -147,6 +147,18 @@ def FreeBeat_Pulse(bar,beat,row,action,customPulse):
                 "customPulse": customPulse 
     }
     level['events'].append(beatDict)
+#{ "bar": 1, "beat": 1, "y": 0, "type": "SetVFXPreset", "rooms": [0], "preset": "SilhouettesOnHBeat", "enable": true },
+def AddVFX(bar,beat,row,preset,enable):
+    actionDict={ "bar": bar,
+                 "beat": beat,
+                 "y": row,
+                 "type": "SetVFXPreset",
+                 "rooms": [0],
+                 "preset": preset,
+                 "enable": enable
+    }
+    level['events'].append(actionDict)
+    
 def Export():
     fileName=level["settings"]["artist"]+"-"+level["settings"]["song"]+".rdlevel"
     with open(fileName,"w",encoding="utf-8")as f:
