@@ -28,8 +28,6 @@ TRANSLATION={
             #二拍和七拍的翻译
             "二拍":"Oneshot",
             "七拍":"Classic",
-            "2":"Oneshot",
-            "7":"Classic",
             #Metadata
             "艺术家":"artist",
             "歌曲":"song",

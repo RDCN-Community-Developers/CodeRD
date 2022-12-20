@@ -26,10 +26,8 @@ def parseCharacter(charactersText):
         for i in range(len(args)):
             if args[i] == ".":
                 args[i] = None
-        character = Character(*args)
-        characters.append(character)
-    return characters
-
+            args[i] = replaceStringIfNecessary(args[i])
+        AddCharacter(*args)
 
 
 content = []
@@ -45,5 +43,5 @@ with open(fileName,'r',encoding="utf-8") as f:
     bar = content[2:]
     bar = [x.strip() for x in bar if x.strip()!=""]
     parseMetaData(metadata)
-    characters=parseCharacter(character)
+    parseCharacter(character)
     Export()
