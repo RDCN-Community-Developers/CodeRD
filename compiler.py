@@ -55,7 +55,7 @@ def parseBar(commands:list,barNum):
 
 content = []
 #fileName = input("请输入sprd文件名:")
-fileName = "exampleYAML.sprd"
+fileName = "example.sprd"
 with open(fileName,'r',encoding="utf-8") as f:
     sprdYAML=yaml.load(f)
     metadata = sprdYAML["metadata"]
