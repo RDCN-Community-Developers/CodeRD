@@ -1,6 +1,7 @@
 from pyrd import *
 from utils import *
 import yaml
+
 FUNCTION_DICT={
     "播放音乐":PlayMusic,
     "七拍":AddClassicBeat,
@@ -55,6 +56,7 @@ def parseBar(commands:list,barNum):
 
 content = []
 #fileName = input("请输入sprd文件名:")
+
 fileName = "example.sprd"
 with open(fileName,'r',encoding="utf-8") as f:
     sprdYAML=yaml.load(f)

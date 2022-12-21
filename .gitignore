@@ -1,3 +1,5 @@
 *.rdlevel
 /__pycache__
 main.py
+*.zip
+/debug
