@@ -177,7 +177,7 @@ def AddPresetVFX(bar,beat,row,preset,enable,*ex):
                            })
     level['events'].append(actionDict)
     
-def SetBackgroundColor(bar,beat,row,mode,color="FFFFFFFF",image=[],fps=130,cmode="ScaleToFill",ft="NearestNeighbor",x=0,y=0,duration=0,ease="Linear"):
+def SetBackgroundColor(bar,beat,row,mode,color="FFFFFFFF",image="",fps=130,cmode="ScaleToFill",ft="NearestNeighbor",x=0,y=0,duration=0,ease="Linear"):
     actionDict={ "bar": bar,
                  "beat": beat,
                  "y": row,
