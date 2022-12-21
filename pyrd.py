@@ -147,6 +147,33 @@ def FreeBeat_Pulse(bar,beat,row,action,customPulse):
                 "customPulse": customPulse 
     }
     level['events'].append(beatDict)
+
+#{ "bar": 1, "beat": 4, "y": 0, "type": "SayReadyGetSetGo", "phraseToSay": "SayReaDyGetSetGoNew", "voiceSource": "Nurse", "tick": 1, "volume": 100 },
+def SayReadyGetSetGo(bar,beat,phraseToSay,voice="Nurse",tick=1,volume=100):
+    voiceDict={
+        "bar":bar,
+        "beat":beat,
+        "y":1,
+        "type":"SayReadyGetSetGo",
+        "phraseToSay":phraseToSay,
+        "voiceSource":voice if voice else "Nurse",
+        "tick":tick if tick else 1,
+        "volume":volume if volume else 100
+    }
+    level['events'].append(voiceDict)
+
+#{ "bar": 1, "beat": 3, "y": 0, "type": "SetBeatsPerMinute", "beatsPerMinute": 100 },
+def SetBeatsPerMinute(bar,beat,bpm):
+    BPMDict = { "bar": bar,
+                "beat": beat, 
+                "y": 0, 
+                "type": "SetBeatsPerMinute", 
+                "beatsPerMinute": bpm 
+            }
+    level['events'].append(BPMDict)
+
+
+
 def Export():
     fileName=level["settings"]["artist"]+"-"+level["settings"]["song"]+".rdlevel"
     with open(fileName,"w",encoding="utf-8")as f:
