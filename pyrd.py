@@ -147,7 +147,7 @@ def FreeBeat_Pulse(bar,beat,row,action,customPulse):
                 "customPulse": customPulse 
     }
     level['events'].append(beatDict)
-#{ "bar": 1, "beat": 1, "y": 0, "type": "SetVFXPreset", "rooms": [0], "preset": "SilhouettesOnHBeat", "enable": true },
+
 def AddPresetVFX(bar,beat,row,preset,enable,*ex):
     actionDict={ "bar": bar,
                  "beat": beat,
@@ -176,6 +176,24 @@ def AddPresetVFX(bar,beat,row,preset,enable,*ex):
                            "ease": ex[4]
                            })
     level['events'].append(actionDict)
+    
+def SetBackgroundColor(bar,beat,row,mode,color="FFFFFFFF",image=[],fps=130,cmode="ScaleToFill",ft="NearestNeighbor",x=0,y=0,duration=0,ease="Linear"):
+    actionDict={ "bar": bar,
+                 "beat": beat,
+                 "y": row,
+                 "type": "SetBackgroundColor",
+                 "rooms": [0],
+                 "backgroundType": mode,
+                 "contentMode": cmode,
+                 "color": color,
+                 "image": [image],
+                 "fps": fps,
+                 "filter": ft,
+                 "scrollX": x,
+                 "scrollY": y,
+                 "duration": duration,
+                 "ease": ease }
+    level['events'].append(actionDict)
 
 def Flash(bar,beat,row,duration):
     actionDict={ "bar": bar,
@@ -185,9 +203,21 @@ def Flash(bar,beat,row,duration):
                  "rooms": [0],
                  "duration": duration }
     level['events'].append(actionDict)
-    
+
+def Comment(bar,beat,row,text,tab,show=False,color="F2E644"):
+    actionDict={ "bar": bar,
+                 "beat": beat,
+                 "y": row,
+                 "type": "Comment",
+                 "tab": tab,
+                 "show": show,
+                 "text": text,
+                 "color": color }
+    level['events'].append(actionDict)
+
 def Export():
     fileName=level["settings"]["artist"]+"-"+level["settings"]["song"]+".rdlevel"
     with open(fileName,"w",encoding="utf-8")as f:
-        f.write(json.dumps(level))
+        f.write(json.dumps(level,sort_keys=True, indent=2).encode('utf-8').decode("unicode_escape"))
+
 
