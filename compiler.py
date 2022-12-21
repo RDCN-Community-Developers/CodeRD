@@ -8,6 +8,8 @@ FUNCTION_DICT={
     "二拍":AddOneshotBeat,
     "设置静音":SetX,
     "预设特效":AddPresetVFX,
+    "设置护士音效":SayReadyGetSetGo,
+    "设置BPM":SetBeatsPerMinute,
     "设置背景":SetBackgroundColor,
     "闪光":Flash,
     "注释":Comment,
@@ -56,8 +58,7 @@ def parseBar(commands:list,barNum):
 
 content = []
 #fileName = input("请输入sprd文件名:")
-
-fileName = "example.sprd"
+fileName = "exampleYAML.sprd" 
 with open(fileName,'r',encoding="utf-8") as f:
     sprdYAML=yaml.load(f)
     metadata = sprdYAML["metadata"]
@@ -68,4 +69,4 @@ with open(fileName,'r',encoding="utf-8") as f:
     for barNum in bars.keys():
         parseBar(bars[barNum],int(barNum))
     Export()
-    print(sprdYAML)
+    print("Done.")
