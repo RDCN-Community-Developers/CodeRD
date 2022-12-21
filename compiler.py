@@ -1,6 +1,6 @@
 from pyrd import *
 from utils import *
-
+import re
 FUNCTION_DICT={
     "播放音乐":PlayMusic,
     "七拍":AddClassicBeat,
@@ -56,7 +56,7 @@ def parseBar(bar:str,barNum):
 
 content = []
 #fileName = input("请输入sprd文件名:")
-fileName = "3q4a.sprd"
+fileName = "debug/1.sprd"
 with open(fileName,'r',encoding="utf-8") as f:
     sprd = f.read()
     content = sprd.split("```")
@@ -64,10 +64,12 @@ with open(fileName,'r',encoding="utf-8") as f:
     metadata = [x.strip() for x in metadata if x.strip()!=""]
     character = content[1].split('\n')
     character = [x.strip() for x in character if x.strip()!=""]
-    bars = content[2:]
-    bars = [x.strip() for x in bars if x.strip()!=""]
+    bar = content[2]
+    pattern = re.compile(r'\[(\d+)\](?>\n)(.*?)(?=\[|$)', re.S)
+    result = re.findall(pattern, bar)
     parseMetaData(metadata)
     parseCharacter(character)
-    for i in range(len(bars)):
-        parseBar(bars[i],i+1)
+    for bar in result:
+        barNum,barContent = bar
+        parseBar(barContent.strip(),int(barNum))
     Export()

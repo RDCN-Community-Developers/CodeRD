@@ -150,5 +150,5 @@ def FreeBeat_Pulse(bar,beat,row,action,customPulse):
 def Export():
     fileName=level["settings"]["artist"]+"-"+level["settings"]["song"]+".rdlevel"
     with open(fileName,"w",encoding="utf-8")as f:
-        f.write(json.dumps(level))
+        f.write(json.dumps(level,sort_keys=True, indent=2).encode('utf-8').decode("unicode_escape"))
 
