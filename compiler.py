@@ -1,6 +1,6 @@
 from pyrd import *
 from utils import *
-import re
+import yaml
 FUNCTION_DICT={
     "播放音乐":PlayMusic,
     "七拍":AddClassicBeat,
@@ -8,7 +8,7 @@ FUNCTION_DICT={
     "设置静音":SetX,
 }
 
-def parseMetaData(metadatas):
+def parseMetaData(metadatas:dict):
     metadataDict = {
         "artist":"",
         "song":"",
@@ -20,29 +20,24 @@ def parseMetaData(metadatas):
         "rankMaxMistakes":[20,15,10,5],
         "rankDescription":["F","D","C","B","A","S"]
     }
-    for metadata in metadatas:
-        dataName,dataContent=metadata.split(" ")
-        metadataDict[replaceString(dataName)]=replaceStringIfNecessary(dataContent)
+    for key in metadatas.keys():
+        metadataDict[replaceStringIfNecessary(key)]=replaceStringIfNecessary(metadatas[key])
     SetLevelMeta(metadataDict)
 
-def parseCharacter(charactersText):
-    characters=[]
-    for characterText in charactersText:
-        args = characterText.split(",")
+def parseCharacter(characters):
+    for character in characters:
+        args = character
         for i in range(len(args)):
             if args[i] == ".":
                 args[i] = None
             args[i] = replaceStringIfNecessary(args[i])
         AddCharacter(*args)
 
-def parseBar(bar:str,barNum):
-    commands=bar.split("\n")
-    print("Bar "+str(barNum))
+def parseBar(commands:list,barNum):
     for i in range(len(commands)):
-        print(commands[i])
-        command = commands[i].strip()
-        head,args=command.split(" ")
-        argList = args.split(",")
+        command = commands[i]
+        head=command[0]
+        argList=command[1:]
         for i in range(len(argList)):
             if argList[i] == ".":
                 argList[i] = None
@@ -56,20 +51,15 @@ def parseBar(bar:str,barNum):
 
 content = []
 #fileName = input("请输入sprd文件名:")
-fileName = "debug/1.sprd"
+fileName = "yaml.sprd"
 with open(fileName,'r',encoding="utf-8") as f:
-    sprd = f.read()
-    content = sprd.split("```")
-    metadata = content[0].split('\n')
-    metadata = [x.strip() for x in metadata if x.strip()!=""]
-    character = content[1].split('\n')
-    character = [x.strip() for x in character if x.strip()!=""]
-    bar = content[2]
-    pattern = re.compile(r'\[(\d+)\](?>\n)(.*?)(?=\[|$)', re.S)
-    result = re.findall(pattern, bar)
+    sprdYAML=yaml.load(f)
+    metadata = sprdYAML["metadata"]
+    characters = sprdYAML["角色"]
+    bars = sprdYAML['小节']
     parseMetaData(metadata)
-    parseCharacter(character)
-    for bar in result:
-        barNum,barContent = bar
-        parseBar(barContent.strip(),int(barNum))
+    parseCharacter(characters)
+    for barNum in bars.keys():
+        parseBar(bars[barNum],int(barNum))
     Export()
+    print(sprdYAML)
