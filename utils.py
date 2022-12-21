@@ -89,7 +89,7 @@ TRANSLATION={
             "模糊":"Blur",
             "径向模糊":"RadialBlur",
             "色调偏移":"HueShift",
-            #闪光时长
+            #闪烁时长
             "短":"Short",
             "中":"Medium",
             "长":"Long",
@@ -100,6 +100,11 @@ TRANSLATION={
             "拉伸":"AspectFit",
             "居中":"Center",
             "平铺":"Tiled",
+            
+            "全部":-1,
+            "无边框":"None",
+            "轮廓":"Outline",
+            "发光":"Glow",
         }
 
 def eng(str:str):

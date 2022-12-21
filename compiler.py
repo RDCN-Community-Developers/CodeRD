@@ -11,8 +11,9 @@ FUNCTION_DICT={
     "设置护士音效":SayReadyGetSetGo,
     "设置BPM":SetBeatsPerMinute,
     "设置背景":SetBackgroundColor,
-    "闪光":Flash,
+    "闪烁":Flash,
     "注释":Comment,
+    "轨道涂色":TintRows,
 }
 
 def parseMetaData(metadatas:dict):

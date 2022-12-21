@@ -148,7 +148,7 @@ def FreeBeat_Pulse(bar,beat,row,action,customPulse):
     }
     level['events'].append(beatDict)
 
-def AddPresetVFX(bar,beat,row,preset,enable,*ip):
+def AddPresetVFX(bar,beat,row,preset,enable=True,*ip):
     ex=list(ip)
     for _ in range(4):
         ex.append(None)
@@ -158,9 +158,9 @@ def AddPresetVFX(bar,beat,row,preset,enable,*ip):
                  "type": "SetVFXPreset",
                  "rooms": [0],
                  "preset": preset,
-                 "enable": enable
+                 "enable": enable if enable else True
     }
-    sp1=["Rain","JPEG","Mosaic","ScreenWaves","Grain","Blizzard","Drawing","Aberration","Blur","HueShift"]
+    sp1=["Rain","JPEG","Mosaic","ScreenWaves","Grain","Blizzard","Drawing","Aberration","Blur","RadialBlur","HueShift"]
     sp2=["TileN","CustomScreenScroll"]
     if preset in sp1:
         actionDict.update({"intensity": ex[0] if ex[0] else 100,
@@ -264,4 +264,3 @@ def Export():
     fileName=level["settings"]["artist"]+"-"+level["settings"]["song"]+".rdlevel"
     with open(fileName,"w",encoding="utf-8")as f:
         f.write(json.dumps(level,sort_keys=True, indent=2).encode('utf-8').decode("unicode_escape"))
-
