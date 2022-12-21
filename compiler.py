@@ -56,18 +56,19 @@ def parseBar(commands:list,barNum):
         argList.insert(0,barNum)
         FUNCTION_DICT[head](*argList)
     
+def run(fileName):
+    content = []
+    with open(fileName,'r',encoding="utf-8") as f:
+        sprdYAML=yaml.load(f, Loader=yaml.SafeLoader)
+        metadata = sprdYAML["metadata"]
+        characters = sprdYAML["角色"]
+        bars = sprdYAML['小节']
+        parseMetaData(metadata)
+        parseCharacter(characters)
+        for barNum in bars.keys():
+            parseBar(bars[barNum],int(barNum))
+        Export()
+        print("Done.")
 
-content = []
-#fileName = input("请输入sprd文件名:")
-fileName = "exampleYAML.sprd" 
-with open(fileName,'r',encoding="utf-8") as f:
-    sprdYAML=yaml.load(f)
-    metadata = sprdYAML["metadata"]
-    characters = sprdYAML["角色"]
-    bars = sprdYAML['小节']
-    parseMetaData(metadata)
-    parseCharacter(characters)
-    for barNum in bars.keys():
-        parseBar(bars[barNum],int(barNum))
-    Export()
-    print("Done.")
+if __name__ == "__main__":
+    run("exampleYAML.sprd")
