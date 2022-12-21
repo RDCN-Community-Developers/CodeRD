@@ -148,7 +148,10 @@ def FreeBeat_Pulse(bar,beat,row,action,customPulse):
     }
     level['events'].append(beatDict)
 
-def AddPresetVFX(bar,beat,row,preset,enable,*ex):
+def AddPresetVFX(bar,beat,row,preset,enable,*ip):
+    ex=list(ip)
+    for _ in range(4):
+        ex.append(None)
     actionDict={ "bar": bar,
                  "beat": beat,
                  "y": row,
@@ -160,20 +163,20 @@ def AddPresetVFX(bar,beat,row,preset,enable,*ex):
     sp1=["Rain","JPEG","Mosaic","ScreenWaves","Grain","Blizzard","Drawing","Aberration","Blur","HueShift"]
     sp2=["TileN","CustomScreenScroll"]
     if preset in sp1:
-        actionDict.update({"intensity": ex[0],
-                           "duration": ex[1],
-                           "ease": ex[2]
+        actionDict.update({"intensity": ex[0] if ex[0] else 100,
+                           "duration": ex[1] if ex[1] else 0,
+                           "ease": ex[2] if ex[2] else "Linear"
                            })
     elif preset in sp2:
-        actionDict.update({"floatX": ex[0],
-                           "floatY": ex[1]
+        actionDict.update({"floatX": ex[0] if ex[0] else 1,
+                           "floatY": ex[1] if ex[1] else 1
                            })
     elif preset=="Bloom":
-        actionDict.update({"threshold": ex[0],
-                           "intensity": ex[1],
-                           "color": ex[2],
-                           "duration": ex[3],
-                           "ease": ex[4]
+        actionDict.update({"threshold": ex[0] if ex[0] else 0.3,
+                           "intensity": ex[1] if ex[1] else 2,
+                           "color": ex[2] if ex[2] else "000000",
+                           "duration": ex[3] if ex[3] else 0,
+                           "ease": ex[4] if ex[4] else "Linear"
                            })
     level['events'].append(actionDict)
     
@@ -185,14 +188,32 @@ def SetBackgroundColor(bar,beat,row,mode,color="FFFFFFFF",image="",fps=130,cmode
                  "rooms": [0],
                  "backgroundType": mode,
                  "contentMode": cmode,
-                 "color": color,
-                 "image": [image],
-                 "fps": fps,
-                 "filter": ft,
-                 "scrollX": x,
-                 "scrollY": y,
-                 "duration": duration,
-                 "ease": ease }
+                 "color": color if color else "FFFFFFFF",
+                 "image": [image] if image else [],
+                 "fps": fps if fps else 130,
+                 "filter": ft if ft else "NearestNeighbor",
+                 "scrollX": x if x else 0,
+                 "scrollY": y if y else 0,
+                 "duration": duration if duration else 0,
+                 "ease": ease if ease else "Linear" }
+    level['events'].append(actionDict)
+
+def TintRows(bar,beat,row,change=-1,border="None",color="FFFFFF",opacity=100,effect=False,totalOpacity=100,tint=False,fillColor="FFFFFF",fillOpacity=100):
+    actionDict={ "bar": bar,
+                 "beat": beat,
+                 "y": row,
+                 "type": "TintRows",
+                 "rooms": [0],
+                 "row": change if change else -1,
+                 "border": border if border else "None",
+                 "borderColor": color if color else "FFFFFF",
+                 "borderOpacity": opacity if opacity else 100,
+                 "opacity": totalOpacity if totalOpacity else 100,
+                 "tint": tint if tint else False,
+                 "tintColor": fillColor if fillColor else "FFFFFF",
+                 "tintOpacity": fillOpacity if fillOpacity else 100 }
+    if effect:
+        actionDict.update({"effect": "Electric"})
     level['events'].append(actionDict)
 
 def Flash(bar,beat,row,duration):
@@ -210,9 +231,9 @@ def Comment(bar,beat,row,text,tab,show=False,color="F2E644"):
                  "y": row,
                  "type": "Comment",
                  "tab": tab,
-                 "show": show,
+                 "show": show if show else False,
                  "text": text,
-                 "color": color }
+                 "color": color if color else "F2E644" }
     level['events'].append(actionDict)
 
 #{ "bar": 1, "beat": 4, "y": 0, "type": "SayReadyGetSetGo", "phraseToSay": "SayReaDyGetSetGoNew", "voiceSource": "Nurse", "tick": 1, "volume": 100 },
@@ -243,3 +264,4 @@ def Export():
     fileName=level["settings"]["artist"]+"-"+level["settings"]["song"]+".rdlevel"
     with open(fileName,"w",encoding="utf-8")as f:
         f.write(json.dumps(level,sort_keys=True, indent=2).encode('utf-8').decode("unicode_escape"))
+
