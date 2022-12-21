@@ -37,7 +37,7 @@ I hope more of you guys can join in to maintain this project.
 Because everyone is a treasure to be treated nicely.
 
 # 使用说明
-这只是一个很简单的模块，具体的内容在pyrd模块里有比较全面的注释，后期会加入Docs进行说明，如果想要使用，直接下载项目并新建Python文件，输入下面内容引用模块即可。
+这只是一个很简单的模块，具体的内容在pyrd模块里有比较全面的注释。如果想要使用，直接下载项目并新建Python文件，输入下面内容引用模块即可。
 ```python
 from pyrd import *
 ```
@@ -49,4 +49,8 @@ For now this is a simple module,and it‘s yet uncompleted.The detailed function
 
 · 错误检验 / Error check and mapper
 
-· 添加二拍提示音(参见rdnurse) / Generate Oneshot nurse sound(will have a look on project rdnurse)
+---
+
+这是为硫酸铜的PyRD写的vfx模块，同时对原代码做了一点修改。
+
+请支持PyRD的原作者：https://github.com/qwedc001
