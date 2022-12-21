@@ -44,6 +44,10 @@ TRANSLATION={
             "噩梦":"VeryTough",
             "开":True,
             "关":False,
+            "声音":"Song",
+            "动作":"Actions",
+            "精灵":"Sprites",
+            "房间":"Rooms",
             #预设特效
             "心跳剪影":"SilhouettesOnHBeat",
             "晕影":"Vignette",
@@ -88,8 +92,15 @@ TRANSLATION={
             #闪光时长
             "短":"Short",
             "中":"Medium",
-            "长":"Long"
-}
+            "长":"Long",
+            
+            "颜色":"Color",
+            "图片":"Image",
+            "填满":"ScaleToFill",
+            "拉伸":"AspectFit",
+            "居中":"Center",
+            "平铺":"Tiled",
+        }
 
 def eng(str:str):
     for i in str:
