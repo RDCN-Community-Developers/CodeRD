@@ -59,7 +59,7 @@ metadata可以填写的参数有：
 
 ```
 详细的参数类型可以在pyrd.py中找到，更详细的docs需要等到有时间再进行维护，或者你们谁维护了给我提交个pull request也行。
-
+编写完成后，请执行python compiler.py 你的sprd文件名
 
 
 （进阶）VFX语法：

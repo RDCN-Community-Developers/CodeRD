@@ -37,20 +37,9 @@ I hope more of you guys can join in to maintain this project.
 Because everyone is a treasure to be treated nicely.
 
 # 使用说明
-这只是一个很简单的模块，具体的内容在pyrd模块里有比较全面的注释。如果想要使用，直接下载项目并新建Python文件，输入下面内容引用模块即可。
+对于Python写rdlevel，请直接使用/For Python,please use:
 ```python
 from pyrd import *
 ```
-# Usage
-For now this is a simple module,and it‘s yet uncompleted.The detailed functions are all in pyrd.py,you can get in and have a look.for using this,just download this project,create a python file and import the module using the code above.
-
-# TODO:
-· 将角色封装为一个类 / Make Character a class
-
-· 错误检验 / Error check and mapper
-
----
-
-这是为硫酸铜的PyRD写的vfx模块，同时对原代码做了一点修改。
-
-请支持PyRD的原作者：https://github.com/qwedc001
+如果使用PyRD的衍生模块SpRD(SimpleRD,基于YAML语法),请转向DosCN.md
+For SpRD(based on YAML),please turn to DocsCN.md
