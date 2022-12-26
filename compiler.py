@@ -4,21 +4,35 @@ import yaml
 
 FUNCTION_DICT={
     "播放音乐":PlayMusic,
+    "PlayMusic":PlayMusic,
     "七拍":AddClassicBeat,
+    "AddClassicBeat":AddClassicBeat,
     "二拍":AddOneshotBeat,
+    "AddOneshotBeat":AddOneshotBeat,
     "设置静音":SetX,
+    "SetX":SetX,
     "设置护士音效":SayReadyGetSetGo,
+    "SayReadyGetSetGo":SayReadyGetSetGo,
     "设置BPM":SetBeatsPerMinute,
+    "SetBPM":SetBeatsPerMinute,
     "设置数拍音效": SetCountingSound,
+    "SetCountingSound":SetCountingSound,
     "朗读轨道": NarrateRowInfo,
+    "NarrateRow":NarrateRowInfo,
     "朗读说明": ReadNarration,
+    "ReadNarration":ReadNarration,
     "显示对话": ShowDialogue,
+    "ShowDialogue":ShowDialogue,
     "预设特效":AddPresetVFX,
+    "AddPresetVFX":AddPresetVFX,
     "设置背景":SetBackgroundColor,
+    "SetBackgroundColor":SetBackgroundColor,
     "闪烁":Flash,
+    "Flash":Flash,
     "注释":Comment,
+    "Comment":Comment,
     "轨道涂色":TintRows,
-    
+    "TintRows":TintRows
 }
 
 

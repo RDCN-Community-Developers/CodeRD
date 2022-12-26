@@ -10,7 +10,7 @@ metadata:
  - [科尔,二拍,0,2,Kick]
 小节:
  1:
-  - [播放音乐,1,sndOrientalTechno,100,0]
+  - [PlayMusic,1,sndOrientalTechno,100,0]
   - [预设特效,1,0,落雨,开]
   - [设置背景,1,1,颜色,626262FF]
   - [轨道涂色,1,2,全部,发光]
