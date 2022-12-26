@@ -1,7 +1,7 @@
 from pyrd import *
 from utils import *
 import yaml
-
+import sys
 FUNCTION_DICT={
     "播放音乐":PlayMusic,
     "PlayMusic":PlayMusic,
@@ -21,6 +21,8 @@ FUNCTION_DICT={
     "SayReadyGetSetGo":SayReadyGetSetGo,
     "设置BPM":SetBeatsPerMinute,
     "SetBPM":SetBeatsPerMinute,
+    "播放音效":PlaySound,
+    "PlaySound":PlaySound,
     "设置数拍音效": SetCountingSound,
     "SetCountingSound":SetCountingSound,
     "朗读轨道": NarrateRowInfo,
@@ -100,4 +102,5 @@ def run(fileName):
         print("Done.")
 
 if __name__ == "__main__":
-    run("exampleYAML.sprd")
+    run(sys.argv[1])
+    input("请按任意键退出...")

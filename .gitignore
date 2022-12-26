@@ -3,3 +3,6 @@
 main.py
 *.zip
 /debug
+/build
+/dist
+compiler.spec
