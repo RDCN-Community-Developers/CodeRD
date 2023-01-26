@@ -102,7 +102,7 @@ def AddClassicBeat(bar, beat, row, tick, swing, If: str = None):
 # { "bar": 1, "beat": 1, "y": 1, "type": "AddOneshotBeat", "row": 1, "pulseType": "Wave", "tick": 1 },
 
 
-def AddOneshotBeat(bar, beat, row, tick, pulseType="Wave", squareSound=False, If: str = None):
+def AddOneshotBeat(bar, beat, row, tick,loops=0,skipShot=False,interval=0,pulseType="Wave", squareSound=False, If: str = None):
     beatDict = {"bar": bar,
                 "beat": beat,
                 "y": row,
@@ -110,7 +110,10 @@ def AddOneshotBeat(bar, beat, row, tick, pulseType="Wave", squareSound=False, If
                 "row": row,
                 "pulseType": pulseType if pulseType else "Wave",
                 "tick": tick,
-                "squareSound": squareSound
+                "squareSound": squareSound,
+                "loops": loops if loops else 0,
+                "interval": interval if interval else 0,
+                "skipshot":skipShot if skipShot else False,
                 }
     level['events'].append(parseIf(beatDict, If))
 # { "bar": 3, "beat": 3, "y": 0, "type": "SetRowXs", "row": 0, "pattern": "------", "syncoBeat": -1, "syncoSwing": 0 },
