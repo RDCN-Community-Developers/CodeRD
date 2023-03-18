@@ -50,7 +50,7 @@ def parseIf(dict, If):
 # 参数从左到右依次是:角色名(有校验),轨道类型(有校验),轨道
 
 
-def AddCharacter(character, rowType, rooms, row, pulseSound, hideAtStart=False, pulseSoundVolume=100, pulseSoundPitch=100, pulseSoundPan=0, pulseSoundOffset=0, If: str = None):
+def AddCharacter(character, rowType, rooms, row, pulseSound, hideAtStart=False, pulseSoundVolume=100, pulseSoundPitch=100, pulseSoundPan=0, pulseSoundOffset=0, If: str = ""):
     # TODO:节拍音效校验
     # 建立单个角色的dict
     characterDict = {"character": character if character else "None",
@@ -71,7 +71,7 @@ def AddCharacter(character, rowType, rooms, row, pulseSound, hideAtStart=False, 
 # { "bar": 1, "beat": 1, "y": 0, "type": "PlaySong", "filename": "sndOrientalTechno", "volume": 100, "pitch": 100, "pan": 0, "offset": 0, "bpm": 100, "loop": false },
 
 
-def PlayMusic(bar, beat, fileName, bpm, offset, volume=100, pitch=100, pan=0, If: str = None):
+def PlayMusic(bar, beat, fileName, bpm, offset, volume=100, pitch=100, pan=0, If: str = ""):
     musicDict = {"bar": bar,
                  "beat": beat,
                  "y": 0,
@@ -88,7 +88,7 @@ def PlayMusic(bar, beat, fileName, bpm, offset, volume=100, pitch=100, pan=0, If
 # { "bar": 1, "beat": 1, "y": 0, "type": "AddClassicBeat", "row": 0, "tick": 1, "swing": 0, "hold": 0 },
 
 
-def AddClassicBeat(bar, beat, row, tick, swing, If: str = None):
+def AddClassicBeat(bar, beat, row, tick, swing, If: str = ""):
     beatDict = {"bar": bar,
                 "beat": beat,
                 "y": row,
@@ -102,7 +102,7 @@ def AddClassicBeat(bar, beat, row, tick, swing, If: str = None):
 # { "bar": 1, "beat": 1, "y": 1, "type": "AddOneshotBeat", "row": 1, "pulseType": "Wave", "tick": 1 },
 
 
-def AddOneshotBeat(bar, beat, row, tick,loops=0,skipShot=False,interval=0,pulseType="Wave", squareSound=False, If: str = None):
+def AddOneshotBeat(bar, beat, row, tick,loops=0,skipShot=False,interval=0,pulseType="Wave", squareSound=False, If: str = ""):
     beatDict = {"bar": bar,
                 "beat": beat,
                 "y": row,
@@ -119,7 +119,7 @@ def AddOneshotBeat(bar, beat, row, tick,loops=0,skipShot=False,interval=0,pulseT
 # { "bar": 3, "beat": 3, "y": 0, "type": "SetRowXs", "row": 0, "pattern": "------", "syncoBeat": -1, "syncoSwing": 0 },
 
 
-def SetX(bar, beat, row, pattern, syncoBeat=-1, syncoSwing=0, If: str = None):
+def SetX(bar, beat, row, pattern, syncoBeat=-1, syncoSwing=0, If: str = ""):
     XDict = {"bar": bar,
              "beat": beat,
              "y": row,
@@ -133,7 +133,7 @@ def SetX(bar, beat, row, pattern, syncoBeat=-1, syncoSwing=0, If: str = None):
 # { "bar": 4, "beat": 7, "y": 0, "type": "AddClassicBeat", "row": 0, "tick": 1, "swing": 0, "setXs": "FourBeat", "hold": 3 },
 
 
-def LongBeat(bar, beat, row, tick, swing, hold, setXs, If: str = None):
+def LongBeat(bar, beat, row, tick, swing, hold, setXs, If: str = ""):
     beatDict = {"bar": bar,
                 "beat": beat,
                 "y": row,
@@ -149,7 +149,7 @@ def LongBeat(bar, beat, row, tick, swing, hold, setXs, If: str = None):
 # { "bar": 2, "beat": 3, "y": 0, "type": "AddFreeTimeBeat", "row": 0, "hold": 0, "pulse": 0 },
 
 
-def FreeBeat_Start(bar, beat, row, If: str = None):
+def FreeBeat_Start(bar, beat, row, If: str = ""):
     beatDict = {
         "bar": bar,
         "beat": beat,
@@ -163,7 +163,7 @@ def FreeBeat_Start(bar, beat, row, If: str = None):
 # { "bar": 2, "beat": 4, "y": 0, "type": "PulseFreeTimeBeat", "row": 0, "hold": 0, "action": "Increment", "customPulse": 0 },
 
 
-def FreeBeat_Pulse(bar, beat, row, action, customPulse, If: str = None):
+def FreeBeat_Pulse(bar, beat, row, action, customPulse, If: str = ""):
     beatDict = {"bar": bar,
                 "beat": beat,
                 "y": row,
@@ -178,7 +178,7 @@ def FreeBeat_Pulse(bar, beat, row, action, customPulse, If: str = None):
 # { "bar": 1, "beat": 4, "y": 0, "type": "SayReadyGetSetGo", "phraseToSay": "SayReaDyGetSetGoNew", "voiceSource": "Nurse", "tick": 1, "volume": 100 },
 
 
-def SayReadyGetSetGo(bar, beat, phraseToSay, voice="Nurse", tick=1, volume=100, If: str = None):
+def SayReadyGetSetGo(bar, beat, phraseToSay, voice="Nurse", tick=1, volume=100, If: str = ""):
     voiceDict = {
         "bar": bar,
         "beat": beat,
@@ -289,7 +289,7 @@ def Comment(bar, beat, row, text, tab, show=False, color="F2E644"):
 # { "bar": 1, "beat": 3, "y": 0, "type": "SetBeatsPerMinute", "beatsPerMinute": 100 },
 
 
-def SetBeatsPerMinute(bar, beat, bpm, If: str = None):
+def SetBeatsPerMinute(bar, beat, bpm, If: str = ""):
     BPMDict = {"bar": bar,
                "beat": beat,
                "y": 0,
@@ -299,7 +299,7 @@ def SetBeatsPerMinute(bar, beat, bpm, If: str = None):
     level['events'].append(parseIf(BPMDict, If))
 
 
-def PlaySound(bar, beat, fileName, volume=100, pitch=100, pan=0, offset=0, isCustom=False, customSoundType="CueSound", If: str = None):
+def PlaySound(bar, beat, fileName, volume=100, pitch=100, pan=0, offset=0, isCustom=False, customSoundType="CueSound", If: str = ""):
     soundDict = {"bar": bar,
                  "beat": beat,
                  "y": 0,
@@ -315,7 +315,7 @@ def PlaySound(bar, beat, fileName, volume=100, pitch=100, pan=0, offset=0, isCus
     level['events'].append(parseIf(soundDict, If))
 
 
-def SetCountingSound(bar, beat, row, voiceSource="IanCountCalm", enabled=True, volume=100, If: str = None):
+def SetCountingSound(bar, beat, row, voiceSource="IanCountCalm", enabled=True, volume=100, If: str = ""):
     countSoundDict = {
         "bar": bar,
         "beat": beat,
@@ -329,7 +329,7 @@ def SetCountingSound(bar, beat, row, voiceSource="IanCountCalm", enabled=True, v
     level['events'].append(parseIf(countSoundDict, If))
 
 
-def NarrateRowInfo(bar, beat, row, infoType, customPattern, skipUnstable=False, soundOnly=False, narrateSkipBeats="on", If: str = None):
+def NarrateRowInfo(bar, beat, row, infoType, customPattern, skipUnstable=False, soundOnly=False, narrateSkipBeats="on", If: str = ""):
     narrateRowDict = {
         "bar": bar,
         "beat": beat,
@@ -345,7 +345,7 @@ def NarrateRowInfo(bar, beat, row, infoType, customPattern, skipUnstable=False, 
     level['events'].append(parseIf(narrateRowDict, If))
 
 
-def ReadNarration(bar, beat, text, category="Describption", If: str = None):
+def ReadNarration(bar, beat, text, category="Describption", If: str = ""):
     narrationDict = {
         "bar": bar,
         "beat": beat,
@@ -357,7 +357,7 @@ def ReadNarration(bar, beat, text, category="Describption", If: str = None):
     level['events'].append(parseIf(narrationDict, If))
 
 
-def ShowDialogue(bar, beat, text, speed, portraitSide="Left", playTextSounds=True, If: str = None):
+def ShowDialogue(bar, beat, text, speed, portraitSide="Left", playTextSounds=True, If: str = ""):
     dialogueDict = {
         "bar": bar,
         "beat": beat,
