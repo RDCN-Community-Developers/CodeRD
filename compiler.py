@@ -2,8 +2,6 @@ from pyrd import *
 from utils import *
 import yaml
 import sys
-
-# 所有支持的参数列表
 FUNCTION_DICT={
     "播放音乐":PlayMusic,
     "PlayMusic":PlayMusic,
@@ -45,7 +43,7 @@ FUNCTION_DICT={
     "TintRows":TintRows
 }
 
-# 读取metadata
+
 def parseMetaData(metadatas: dict):
     metadataDict = {
         "artist": "",
@@ -63,7 +61,7 @@ def parseMetaData(metadatas: dict):
             key)] = replaceStringIfNecessary(metadatas[key])
     SetLevelMeta(metadataDict)
 
-# 读取角色定义
+
 def parseCharacter(characters):
     for character in characters:
         args = character
@@ -73,7 +71,7 @@ def parseCharacter(characters):
             args[i] = replaceStringIfNecessary(args[i])
         AddCharacter(*args)
 
-# 读取小节定义
+
 def parseCommand(head,argList,barNum):
     for i in range(len(argList)):
         if argList[i] == ".":
@@ -85,7 +83,6 @@ def parseCommand(head,argList,barNum):
     argList.insert(0,barNum)
     FUNCTION_DICT[head](*argList)
 
-# 读取小节定义
 def parseBar(commands: list, barNum,customPattern:dict|None):
     for i in range(len(commands)):
         command = commands[i]
@@ -100,7 +97,7 @@ def parseBar(commands: list, barNum,customPattern:dict|None):
         else:
             parseCommand(head,argList,barNum)
         
-# 读取自定义方法定义
+
 def parseCustomPatterns(commands,barNum,beatNum):
     for command in commands: #对于customPatterns 是有args的，没有args的是调用customPatterns的bars
         head = command[0]
@@ -110,40 +107,45 @@ def parseCustomPatterns(commands,barNum,beatNum):
         argsList.insert(beat,0)# 重新构建argsList
         parseCommand(head,argsList,barNum)
 
-# 对读取的sprd文件进行语法检查
-def syntaxCheck(sprdYAML):
-    metadata = sprdYAML["metadata"]
-    characters = sprdYAML["角色"]
-    bars = sprdYAML['小节']
-    customPattern=None
-    try:
-        customPattern = sprdYAML['自定义方法']
-    except:
-        customPattern = None
-    for key in metadata.keys():
-        if key not in ["artist","song","author","difficulty","seizureWarning","description","tags","rankMaxMistakes","rankDescription"]:
-            raise Exception("metadata中有无效的键值对")
-    for character in characters:
-        if len(character)!=5:
-            raise Exception("角色定义不符合规范")
+def syntaxCheck(sprdYAML: dict):
+    metadata = sprdYAML.get("metadata")
+    if metadata is None:
+        raise ValueError("metadata is missing")
+    if not isinstance(metadata, dict):
+        raise TypeError("metadata should be a dictionary")
+    characters = sprdYAML.get("角色")
+    if characters is None:
+        raise ValueError("characters is missing")
+    if not isinstance(characters, list):
+        raise TypeError("characters should be a list")
+    bars = sprdYAML.get('小节')
+    if bars is None:
+        raise ValueError("bars is missing")
+    if not isinstance(bars, dict):
+        raise TypeError("bars should be a dictionary")
+    customPattern = sprdYAML.get('自定义方法')
+    if customPattern and not isinstance(customPattern, dict):
+        raise TypeError("customPattern should be a dictionary",type(customPattern))
     for barNum in bars.keys():
-        for command in bars[barNum]:
-            if len(command)<2:
-                raise Exception("小节定义不符合规范")
+        commands = bars[barNum]
+        if not isinstance(commands, list):
+            raise TypeError(f"commands in bar {barNum} should be a list")
+        for command in commands:
+            if not isinstance(command, list):
+                raise TypeError(f"command in bar {barNum} should be a list")
             head = command[0]
-            if head not in FUNCTION_DICT.keys():
-                raise Exception("小节定义不符合规范")
-    if customPattern:
-        for customPatternName in customPattern.keys():
-            for command in customPattern[customPatternName]:
-                if len(command)<2:
-                    raise Exception("自定义方法定义不符合规范")
-                head = command[0]
-                if head not in FUNCTION_DICT.keys():
-                    raise Exception("自定义方法定义不符合规范")
-    print("语法检查通过")
+            if head not in FUNCTION_DICT and (customPattern and head not in customPattern):
+                raise ValueError(f"unknown command {head} in bar {barNum}")
+            argList = command[1:]
+            for i in range(len(argList)):
+                if argList[i] == ".":
+                    argList[i] = None
+                try:
+                    argList[i] = eval(argList[i])
+                except:
+                    pass
 
-# 读取sprd文件
+
 def run(fileName):
     with open(fileName,'r',encoding="utf-8") as f:
         sprdYAML=yaml.load(f, Loader=yaml.SafeLoader)
@@ -163,6 +165,5 @@ def run(fileName):
         Export()
         print("Done.")
 
-# 读取命令行参数
 import sys
 run(sys.argv[1])
