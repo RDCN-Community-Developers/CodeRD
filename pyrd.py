@@ -1,4 +1,8 @@
+import inspect
 import json
+
+# 将所有函数放在__all__里方便其他程序调用
+__all__=['SetLevelMeta','parseIf','AddCharacter','PlayMusic','AddClassicBeat','AddOneshotBeat','SetX','LongBeat','FreeBeat_Start','FreeBeat_Pulse','SayReadyGetSetGo','SetBeatsPerMinute','PlaySound','SetCountingSound','NarrateRowInfo','ReadNarration','ShowDialogue','AddPresetVFX','SetBackgroundColor','Flash','Comment','TintRows','Export']
 
 level = {
     "settings": {},
@@ -377,3 +381,7 @@ def Export():
     with open(fileName, "w", encoding="utf-8")as f:
         f.write(json.dumps(level, sort_keys=True, indent=2).encode(
             'utf-8').decode("unicode_escape"))
+
+def getArgs(func):
+    args = inspect.signature(func)
+    return args.parameters.keys()
