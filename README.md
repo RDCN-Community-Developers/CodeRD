@@ -43,3 +43,10 @@ from pyrd import *
 ```
 如果使用PyRD的衍生模块SpRD(SimpleRD,基于YAML语法),请转向DosCN.md
 For SpRD(based on YAML),please turn to DocsCN.md
+=======
+
+# TODO:
+· 将角色封装为一个类 / Make Character a class
+
+· 添加二拍提示音(参见rdnurse) / Generate Oneshot nurse sound(will have a look on project rdnurse)
+
