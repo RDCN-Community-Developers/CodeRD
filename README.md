@@ -37,17 +37,16 @@ I hope more of you guys can join in to maintain this project.
 Because everyone is a treasure to be treated nicely.
 
 # 使用说明
-请切换至YAML分支，此分支半废弃。
-# Usage
-Please switch to branch yaml,the main branch is now half-outdated.
+对于Python写rdlevel，请直接使用/For Python,please use:
+```python
+from pyrd import *
+```
+如果使用PyRD的衍生模块SpRD(SimpleRD,基于YAML语法),请转向DosCN.md
+For SpRD(based on YAML),please turn to DocsCN.md
+=======
 
 # TODO:
 · 将角色封装为一个类 / Make Character a class
 
-· 错误检验 / Error check and mapper
-
 · 添加二拍提示音(参见rdnurse) / Generate Oneshot nurse sound(will have a look on project rdnurse)
 
-# WON’T DO:
-· VFX相关，因为本项目是比较针对于视障群体的，所以并不考虑对视觉和装饰部分逻辑进行处理（主要是没时间） / Functions about visual effects.Despite that this project is aimed to blind people,also I don‘t have a lot of time to code.
-(如果你们谁有时间可以自己fork然后做了往我这里提pr) / If you guys have plenty of time you can fork,do it and submit pull request.
